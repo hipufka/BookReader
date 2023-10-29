@@ -1,14 +1,12 @@
 import src.model as mo
 
-#if __name__ == '__main__':
 #TODO: add mode to read from url to html page
 #TODO: add other text formats to process - epub, fb2, pdf
 
 # File with text to voice
-book = "frost_and_starlight_excerpt"
+book = "j_austin_quote_en"
 
-text_file = open(book + ".txt", "r")
-data = text_file.read()
-text_file.close()
+with open(book + ".txt", "r") as text_file:
+    data = text_file.read()
 
-_ = mo.text_to_speech(text=data, book_name=book, lang='en')
+mo.text_to_speech(text=data, book_name=book, lang='en')

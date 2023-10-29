@@ -43,16 +43,17 @@ def text_to_speech(text: str, book_name: str, lang='en'):
     audio = []
     num_iterations = 0
 
+    print("Number of iterations:", len(text_parts))
     for slice in text_parts:
+        print(f'Iteration number: {num_iterations}')
         aud = model.apply_tts(text=slice, speaker=speaker, sample_rate=sample_rate)
         audio.append(aud)
         num_iterations += 1
-        print(f'Iteration number: {num_iterations}')
 
+    print("Audio concatenation started")
     audio_concat = audio[0]
     for i in range(1, len(audio)):
         audio_concat = torch.cat((audio_concat, audio[i]), 0)
 
+    print("Audio save started")
     torchaudio.save(book_name + ".wav", audio_concat.unsqueeze(0), sample_rate=sample_rate)
-
-    return
